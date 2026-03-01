@@ -2,10 +2,14 @@
 <html>
 <head>
 
+<meta charset="UTF-8">
+<title>Video Player</title>
+
 <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
 <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
 
 </head>
+
 <body>
 
 <video
@@ -17,27 +21,26 @@
   data-setup='{}'
 >
 
-  <!-- HLS -->
+  <!-- HLS master playlist -->
   <source
     src="hls/master.m3u8"
     type="application/x-mpegURL"
   />
 
-  <!-- SUBTITLE 1 -->
+  <!-- Subtitles -->
   <track
     kind="subtitles"
-    src="sub1.vtt"
+    src="subs/english.vtt"
     srclang="en"
     label="English"
     default
   >
 
-  <!-- SUBTITLE 2 -->
   <track
     kind="subtitles"
-    src="sub2.vtt"
-    srclang="en"
-    label="Full Sub"
+    src="subs/hindi.vtt"
+    srclang="hi"
+    label="Hindi"
   >
 
 </video>
@@ -52,7 +55,7 @@ player.ready(function () {
 
   for (var i = 0; i < tracks.length; i++) {
 
-    console.log(tracks[i].label);
+    console.log("Audio:", tracks[i].label);
 
   }
 
