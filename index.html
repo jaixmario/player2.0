@@ -2,28 +2,43 @@
 <html>
 <head>
 
-<meta charset="UTF-8">
-
-<link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet">
+<link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
 <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
 
 </head>
-
 <body>
 
 <video
   id="my-video"
   class="video-js vjs-default-skin"
   controls
-  width="900"
-  height="500"
+  width="800"
+  height="450"
   data-setup='{}'
 >
 
+  <!-- HLS -->
   <source
     src="hls/master.m3u8"
     type="application/x-mpegURL"
   />
+
+  <!-- SUBTITLE 1 -->
+  <track
+    kind="subtitles"
+    src="sub1.vtt"
+    srclang="en"
+    label="English"
+    default
+  >
+
+  <!-- SUBTITLE 2 -->
+  <track
+    kind="subtitles"
+    src="sub2.vtt"
+    srclang="en"
+    label="Full Sub"
+  >
 
 </video>
 
@@ -33,18 +48,12 @@ var player = videojs('my-video');
 
 player.ready(function () {
 
-  // show audio tracks
-  var audioTracks = player.audioTracks();
+  var tracks = player.audioTracks();
 
-  for (var i = 0; i < audioTracks.length; i++) {
-    console.log("Audio:", audioTracks[i].label);
-  }
+  for (var i = 0; i < tracks.length; i++) {
 
-  // show text tracks (subtitles)
-  var textTracks = player.textTracks();
+    console.log(tracks[i].label);
 
-  for (var i = 0; i < textTracks.length; i++) {
-    console.log("Sub:", textTracks[i].label);
   }
 
 });
