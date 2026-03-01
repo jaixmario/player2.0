@@ -1,63 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HLS Player</title>
 
-<link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
-<script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
 
+  <style>
+    body {
+      margin: 0;
+      background: #0f0f0f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+
+    .player-container {
+      width: 95%;
+      max-width: 1000px;
+    }
+
+    .video-js {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+  </style>
 </head>
 <body>
 
-<video
-  id="my-video"
-  class="video-js vjs-default-skin"
-  controls
-  width="800"
-  height="450"
-  data-setup='{}'
->
+<div class="player-container">
 
-  <!-- HLS -->
-  <source
-    src="hls/master.m3u8"
-    type="application/x-mpegURL"
-  />
-
-  <!-- SUBTITLE 1 -->
-  <track
-    kind="subtitles"
-    src="sub1.vtt"
-    srclang="en"
-    label="English"
-    default
+  <video
+    id="my-video"
+    class="video-js vjs-default-skin vjs-big-play-centered"
+    controls
+    preload="auto"
+    data-setup='{}'
   >
 
-  <!-- SUBTITLE 2 -->
-  <track
-    kind="subtitles"
-    src="sub2.vtt"
-    srclang="en"
-    label="Full Sub"
-  >
+    <!-- HLS MASTER -->
+    <source
+      src="hls/master.m3u8"
+      type="application/x-mpegURL"
+    />
 
-</video>
+    <!-- SUBTITLE (same folder as index.html) -->
+    <track
+      kind="subtitles"
+      src="sub_eng.vtt"
+      srclang="en"
+      label="English"
+      default
+    >
+
+  </video>
+
+</div>
 
 <script>
+  var player = videojs('my-video');
 
-var player = videojs('my-video');
+  player.ready(function () {
+    console.log("Player Ready");
 
-player.ready(function () {
+    var tracks = player.audioTracks();
 
-  var tracks = player.audioTracks();
-
-  for (var i = 0; i < tracks.length; i++) {
-
-    console.log(tracks[i].label);
-
-  }
-
-});
-
+    for (var i = 0; i < tracks.length; i++) {
+      console.log("Audio Track:", tracks[i].label);
+    }
+  });
 </script>
 
 </body>
