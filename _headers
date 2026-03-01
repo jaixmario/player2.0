@@ -6,3 +6,10 @@
 
 *.vtt
   Content-Type: text/vtt
+
+
+/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Headers: *
+  Access-Control-Allow-Methods: GET,HEAD,OPTIONS
+  Content-Type: application/vnd.apple.mpegurl
